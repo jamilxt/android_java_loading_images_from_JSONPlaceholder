@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.ranger.techtrix.R;
 import com.app.ranger.techtrix.model.Feed;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
@@ -47,8 +49,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         holder.tvid.setText(String.valueOf(mData.get(position).getId()));
         holder.tvtitle.setText(mData.get(position).getTitle());
 
-        Glide.with(mContext).load(mData.get(position).getThumbUrl()).apply(option).into(holder.ivthumb);
-        Glide.with(mContext).load(mData.get(position).getImageUrl()).apply(option).into(holder.ivpreview);
+        GlideUrl thumbUrl = new GlideUrl(mData.get(position).getThumbUrl(), new LazyHeaders.Builder()
+                .addHeader("User-Agent", "TechTrix")
+                .build());
+        Glide.with(mContext).load(thumbUrl).into(holder.ivthumb);
+
+        GlideUrl imgUrl = new GlideUrl(mData.get(position).getImageUrl(), new LazyHeaders.Builder()
+                .addHeader("User-Agent", "TechTrix")
+                .build());
+        Glide.with(mContext).load(imgUrl).into(holder.ivpreview);
 
 
     }
