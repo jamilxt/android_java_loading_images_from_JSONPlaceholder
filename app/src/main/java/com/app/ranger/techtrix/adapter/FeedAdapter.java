@@ -49,6 +49,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         holder.tvid.setText(String.valueOf(mData.get(position).getId()));
         holder.tvtitle.setText(mData.get(position).getTitle());
 
+        // Ref:
+        // 1) https://stackoverflow.com/a/62426188/5114312
+        // 2) https://cloud.tencent.com/developer/ask/186163/answer/291743
         GlideUrl thumbUrl = new GlideUrl(mData.get(position).getThumbUrl(), new LazyHeaders.Builder()
                 .addHeader("User-Agent", "TechTrix")
                 .build());
