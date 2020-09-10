@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "437734001553",
+    "firebase_url": "https://techtrix-demo.firebaseio.com",
+    "project_id": "techtrix-demo",
+    "storage_bucket": "techtrix-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437734001553:android:8b9d54632295da997e6830",
+        "android_client_info": {
+          "package_name": "com.app.ranger.techtrix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437734001553-n0a8jv99gm3ihbkmer0htljfrib11l1l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOllbuZiY0djcaYHHwTGYq-GO9KJUez6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437734001553-n0a8jv99gm3ihbkmer0htljfrib11l1l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
