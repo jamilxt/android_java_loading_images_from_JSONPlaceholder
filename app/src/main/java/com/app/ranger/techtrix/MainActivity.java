@@ -1,13 +1,14 @@
 package com.app.ranger.techtrix;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser mFirebaseUser;
 
     private String URL_JSON = "https://jsonplaceholder.typicode.com/photos";
-    private JsonArrayRequest arrayRequest ;
-    private RequestQueue requestQueue ;
-    private List<Feed> lstfeed ;
+    private JsonArrayRequest arrayRequest;
+    private RequestQueue requestQueue;
+    private List<Feed> lstfeed = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-
-
 
 
         fab_logout = findViewById(R.id.fab_logout);
@@ -65,9 +65,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        JsonRequest();
+
     }
 
-    public void JsonRequest(){
+    public void JsonRequest() {
 
 
         arrayRequest = new JsonArrayRequest(URL_JSON, new Response.Listener<JSONArray>() {
@@ -78,8 +80,10 @@ public class MainActivity extends AppCompatActivity {
 
                 JSONObject jsonObject = null;
 
+//                Log.e("response", response.toString());
 
-                for (int i = 0 ; i<response.length();i++) {
+
+                for (int i = 0; i < response.length(); i++) {
 
                     //Toast.makeText(getApplicationContext(),String.valueOf(i),Toast.LENGTH_SHORT).show();
 
@@ -96,18 +100,18 @@ public class MainActivity extends AppCompatActivity {
 
                         //Toast.makeText(MainActivity.this,anime.toString(),Toast.LENGTH_SHORT).show();
                         lstfeed.add(feed);
-                    }
-                    catch (JSONException e) {
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
 
 
-                Toast.makeText(MainActivity.this,"Size of List "+String.valueOf(lstfeed.size()),Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this,lstfeed.get(1).toString(),Toast.LENGTH_SHORT).show();
-
+//                Toast.makeText(MainActivity.this, "Size of List " + String.valueOf(lstfeed.size()), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, lstfeed.get(1).toString(), Toast.LENGTH_SHORT).show();
+//
                 setRvAdapter(lstfeed);
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -122,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setRvAdapter(List<Feed> list) {
 
-        FeedAdapter myAdapter = new FeedAdapter(this,list) ;
+        FeedAdapter myAdapter = new FeedAdapter(this, list);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rv_feed.setLayoutManager(manager);
         rv_feed.setHasFixedSize(true);

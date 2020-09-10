@@ -17,11 +17,11 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder>{
+public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> {
 
+    RequestOptions option;
     private Context mContext;
     private List<Feed> mData;
-    RequestOptions option;
 
     public FeedAdapter(Context mContext, List<Feed> mData) {
         this.mContext = mContext;
@@ -34,7 +34,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder>{
     public FeedAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        view = inflater.inflate(R.layout.model_feed,parent,false);
+        view = inflater.inflate(R.layout.model_feed, parent, false);
 
 
         return new MyViewHolder(view);
@@ -43,8 +43,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull FeedAdapter.MyViewHolder holder, int position) {
 
-        holder.tvalbum.setText(mData.get(position).getAlbumID());
-        holder.tvid.setText(mData.get(position).getId());
+        holder.tvalbum.setText(String.valueOf(mData.get(position).getAlbumID()));
+        holder.tvid.setText(String.valueOf(mData.get(position).getId()));
         holder.tvtitle.setText(mData.get(position).getTitle());
 
         Glide.with(mContext).load(mData.get(position).getThumbUrl()).apply(option).into(holder.ivthumb);
@@ -55,14 +55,13 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder>{
 
     @Override
     public int getItemCount() {
-        return 10;
+        return mData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvalbum,tvid,tvtitle;
-        ImageView ivthumb,ivpreview;
-
+        TextView tvalbum, tvid, tvtitle;
+        ImageView ivthumb, ivpreview;
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -78,5 +77,5 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder>{
     }
 
 
-    }
+}
 

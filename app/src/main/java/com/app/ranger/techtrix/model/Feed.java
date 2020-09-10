@@ -2,9 +2,9 @@ package com.app.ranger.techtrix.model;
 
 public class Feed {
 
-    private int albumID ;
+    private int albumID;
     private int id;
-    private String title ;
+    private String title;
     private String imageUrl;
     private String thumbUrl;
 

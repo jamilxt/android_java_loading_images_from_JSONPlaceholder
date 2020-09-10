@@ -1,8 +1,5 @@
 package com.app.ranger.techtrix.authentication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.ranger.techtrix.MainActivity;
 import com.app.ranger.techtrix.R;
@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignUpActivity extends AppCompatActivity {
 
     EditText et_firstName, et_lastName, et_email, et_phone, et_password;
-    Button btn_signUp,btn_loginP;
+    Button btn_signUp, btn_loginP;
 
     FirebaseAuth mFirebaseAuth;
 
@@ -34,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         et_firstName = findViewById(R.id.et_firstName);
         et_lastName = findViewById(R.id.et_lastName);
-        et_email= findViewById(R.id.et_email);
+        et_email = findViewById(R.id.et_email);
         et_phone = findViewById(R.id.et_phone);
         et_password = findViewById(R.id.et_password);
 
@@ -45,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
         btn_loginP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
             }
         });
 
@@ -54,32 +54,30 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                if(et_email.getText().toString().isEmpty()){
+                if (et_email.getText().toString().isEmpty()) {
                     et_email.setError("empty");
                     et_email.requestFocus();
-                }else if (et_password.getText().toString().isEmpty()){
+                } else if (et_password.getText().toString().isEmpty()) {
                     et_password.setError("empty");
                     et_password.requestFocus();
                 } else {
-                    mFirebaseAuth.createUserWithEmailAndPassword(et_email.getText().toString(),et_password.getText().toString()).addOnCompleteListener(SignUpActivity.this,
+                    mFirebaseAuth.createUserWithEmailAndPassword(et_email.getText().toString(), et_password.getText().toString()).addOnCompleteListener(SignUpActivity.this,
                             new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(SignUpActivity.this, "Registration complete", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
-                                Log.d("SignupActivity", "createUserWithEmail:success");
-                            } else
-                                Toast.makeText(SignUpActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
-                            Log.w("SignupActivity", "createUserWithEmail:failure", task.getException());
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(SignUpActivity.this, "Registration complete", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                                        Log.d("SignupActivity", "createUserWithEmail:success");
+                                    } else
+                                        Toast.makeText(SignUpActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                                    Log.w("SignupActivity", "createUserWithEmail:failure", task.getException());
 
-                        }
-                    });
+                                }
+                            });
                 }
             }
         });
-
-
 
 
     }

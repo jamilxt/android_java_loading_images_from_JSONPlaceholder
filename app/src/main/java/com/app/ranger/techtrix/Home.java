@@ -21,21 +21,20 @@ public class Home extends Application {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
 
-        if (mFirebaseUser != null){
+        if (mFirebaseUser != null) {
 
-            Intent feed = new Intent(Home.this,MainActivity.class);
+            Intent feed = new Intent(Home.this, MainActivity.class);
 
             feed.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             startActivity(feed);
-        }else {
+        } else {
             Intent signup = new Intent(Home.this, SignUpActivity.class);
 
             signup.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             startActivity(signup);
         }
-
 
 
     }
